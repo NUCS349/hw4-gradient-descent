@@ -1,4 +1,5 @@
 import numpy as np
+from code import L1Regularization, L2Regularization
 
 
 class Loss:
@@ -6,41 +7,55 @@ class Loss:
     An abstract base class for a loss function that computes both the original
     loss function (the forward pass) as well as its gradient (the backward
     pass).
+
+    Arguments:
+        regularization - (string or None) The type of regularization to
+            perform. Should take on one of the following values:
+              - 'l1': Performs l1 regularization
+              - 'l2': Performs l2 regularization
+              - None: Does not perform regularization
     """
 
-    def __init__(self):
-        self.losses = None
-        self.X = None
-        self.y = None
+    def __init__(self, regularization=None):
+        self.regularization = regularization
 
-    def forward(self, X, y):
+    def forward(self, X, w, y):
         """
-        Computes the forward pass through the loss function.
+        Computes the forward pass through the loss function. If
+        self.regularization is not None, also adds the forward pass of the
+        regularization term to the loss.
 
         Arguments:
-            X - (np.array) An Nxd array of features, where N is the number of
-                examples and d is the number of features in each example.
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
             y - (np.array) A 1D array of targets of length N.
-        Modifies:
-            self.losses - (np.array) A 1D array of per-example losses of length
-                N.
-            self.X - (np.array) The stored features X passed in to the
-                function. Used in self.backward().
-            self.y - (np.array) The stored targets y passed in to the function.
-                Used in self.backward().
         Returns:
             loss - (float) The average loss.
         """
         pass
 
-    def backward(self):
+    def backward(self, X, w, y):
         """
         Computes the gradient of the loss function with respect to the model
-        parameters.
+        parameters. If self.regularization is not None, also adds the backward
+        pass of the regularization term to the loss.
 
+        Arguments:
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
+            y - (np.array) A 1D array of targets of length N.
         Returns:
-            gradient - (np.array) The d-dimensional gradient of the loss
-                function with respect to the model parameters.
+            gradient - (np.array) The (d+1)-dimensional gradient of the loss
+                function with respect to the model parameters. The +1 refers to
+                the bias term.
         """
         pass
 
@@ -48,38 +63,47 @@ class Loss:
 class SquaredLoss(Loss):
     """
     The squared loss function.
-
-    TODO: Pseudocode
     """
 
-    def forward(self, X, y):
+    def forward(self, X, w, y):
         """
-        Computes the forward pass through the loss function.
+        Computes the forward pass through the loss function. If
+        self.regularization is not None, also adds the forward pass of the
+        regularization term to the loss.
+
+        For squared
 
         Arguments:
-            X - (np.array) An Nxd array of features, where N is the number of
-                examples and d is the number of features in each example.
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
             y - (np.array) A 1D array of targets of length N.
-        Modifies:
-            self.losses - (np.array) A 1D array of per-example losses of length
-                N.
-            self.X - (np.array) The stored features X passed in to the
-                function. Used in self.backward().
-            self.y - (np.array) The stored targets y passed in to the function.
-                Used in self.backward().
         Returns:
             loss - (float) The average loss.
         """
         raise NotImplementedError()
 
-    def backward(self):
+    def backward(self, X, w, y):
         """
         Computes the gradient of the loss function with respect to the model
-        parameters.
+        parameters. If self.regularization is not None, also adds the backward
+        pass of the regularization term to the loss.
 
+        Arguments:
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
+            y - (np.array) A 1D array of targets of length N.
         Returns:
-            gradient - (np.array) The d-dimensional gradient of the loss
-                function with respect to the model parameters.
+            gradient - (np.array) The (d+1)-dimensional gradient of the loss
+                function with respect to the model parameters. The +1 refers to
+                the bias term.
         """
         raise NotImplementedError()
 
@@ -87,37 +111,44 @@ class SquaredLoss(Loss):
 class HingeLoss(Loss):
     """
     The hinge loss function.
-
-    TODO: Pseudocode
     """
 
-    def forward(self, X, y):
+    def forward(self, X, w, y):
         """
-        Computes the forward pass through the loss function.
+        Computes the forward pass through the loss function. If
+        self.regularization is not None, also adds the forward pass of the
+        regularization term to the loss.
 
         Arguments:
-            X - (np.array) An Nxd array of features, where N is the number of
-                examples and d is the number of features.
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
             y - (np.array) A 1D array of targets of length N.
-        Modifies:
-            self.losses - (np.array) A 1D array of per-example losses of length
-                N.
-            self.X - (np.array) The stored features X passed in to the
-                function. Used in self.backward().
-            self.y - (np.array) The stored targets y passed in to the function.
-                Used in self.backward().
         Returns:
             loss - (float) The average loss.
         """
         raise NotImplementedError()
 
-    def backward(self):
+    def backward(self, X, w, y):
         """
         Computes the gradient of the loss function with respect to the model
-        parameters.
+        parameters. If self.regularization is not None, also adds the backward
+        pass of the regularization term to the loss.
 
+        Arguments:
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
+            y - (np.array) A 1D array of targets of length N.
         Returns:
-            gradient - (np.array) The d-dimensional gradient of the loss
-                function with respect to the model parameters.
+            gradient - (np.array) The (d+1)-dimensional gradient of the loss
+                function with respect to the model parameters. The +1 refers to
+                the bias term.
         """
         raise NotImplementedError()
