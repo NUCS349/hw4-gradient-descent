@@ -1,5 +1,4 @@
 import numpy as np
-from code import L1Regularization, L2Regularization
 
 
 class Loss:

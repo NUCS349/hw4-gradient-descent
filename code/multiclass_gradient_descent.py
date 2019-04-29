@@ -1,3 +1,4 @@
+import numpy as np
 from code import GradientDescent
 
 
@@ -29,8 +30,8 @@ class MultiClassGradientDescent:
         """
         Fits a multiclass gradient descent learner to the features and targets
         by using One-vs-All classification. In other words, for each of the c
-        output classes, train a binary classifier to determine whether each
-        example does or does not belong to that class.
+        output classes, train a GradientDescent classifier to determine whether
+        each example does or does not belong to that class.
 
         Store your c GradientDescent classifiers in the list self.model. Index
         c of self.model should correspond to the binary classifier trained to
@@ -39,7 +40,7 @@ class MultiClassGradientDescent:
         Arguments:
             features - (np.array) An Nxd array of features, where N is the
                 number of examples and d is the number of features.
-            targets - (np.array) A 1D array of targets of length N.
+            targets - (np.array) A 2D array of targets of size Nxc.
             batch_size - (int or None) The number of examples used in each
                 iteration. If None, use all of the examples in each update.
             max_iter - (int) The maximum number of updates to perform.

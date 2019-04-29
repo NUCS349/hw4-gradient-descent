@@ -1,7 +1,6 @@
 import numpy as np
 from code import HingeLoss, SquaredLoss
 from code import L1Regularization, L2Regularization
-from matplotlib import pyplot as plt
 
 
 class GradientDescent:
