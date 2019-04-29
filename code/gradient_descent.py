@@ -57,6 +57,9 @@ class GradientDescent:
         model has converged. If this convergence criteria has not been met
         after max_iter iterations, also assume convergence and terminate.
 
+        You should include a bias term by APPENDING a column of 1s to your
+        feature matrix. The bias term is then the last value in self.model.
+
         Arguments:
             features - (np.array) An Nxd array of features, where N is the
                 number of examples and d is the number of features.

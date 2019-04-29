@@ -6,5 +6,42 @@
     "test_netid": {
         "weight": "required",
         "depends": []
+    },
+    "test_regularization": {
+        "weight": 1,
+        "depends": [
+            "test_l1_regularization",
+            "test_l2_regularization"
+        ]
+    },
+    "test_l1_regularization": {
+        "weight": 1,
+        "depends": [
+            "test_l1_regularization_forward",
+            "test_l1_regularization_backward"
+        ]
+    },
+    "test_l2_regularization": {
+        "weight": 1,
+        "depends": [
+            "test_l2_regularization_forward",
+            "test_l2_regularization_backward"
+        ]
+    },
+    "test_l1_regularization_forward": {
+        "weight": 1,
+        "depends": []
+    },
+    "test_l1_regularization_backward": {
+        "weight": 1,
+        "depends": []
+    },
+    "test_l2_regularization_forward": {
+        "weight": 1,
+        "depends": []
+    },
+    "test_l2_regularization_backward": {
+        "weight": 1,
+        "depends": []
     }
 }

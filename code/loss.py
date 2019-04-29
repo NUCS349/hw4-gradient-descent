@@ -8,11 +8,9 @@ class Loss:
     pass).
 
     Arguments:
-        regularization - (string or None) The type of regularization to
-            perform. Should take on one of the following values:
-              - 'l1': Performs l1 regularization
-              - 'l2': Performs l2 regularization
-              - None: Does not perform regularization
+        regularization - (Regularization or None) The type of regularization to
+            perform. Either a derived class of Regularization or None. If None,
+            no regularization is performed.
     """
 
     def __init__(self, regularization=None):
@@ -70,7 +68,7 @@ class SquaredLoss(Loss):
         self.regularization is not None, also adds the forward pass of the
         regularization term to the loss.
 
-        For squared
+        # TODO
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
@@ -90,6 +88,8 @@ class SquaredLoss(Loss):
         Computes the gradient of the loss function with respect to the model
         parameters. If self.regularization is not None, also adds the backward
         pass of the regularization term to the loss.
+
+        # TODO
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
@@ -118,6 +118,8 @@ class HingeLoss(Loss):
         self.regularization is not None, also adds the forward pass of the
         regularization term to the loss.
 
+        # TODO
+
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
                 of examples and d is the number of features. The +1 refers to
@@ -136,6 +138,8 @@ class HingeLoss(Loss):
         Computes the gradient of the loss function with respect to the model
         parameters. If self.regularization is not None, also adds the backward
         pass of the regularization term to the loss.
+
+        # TODO
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number

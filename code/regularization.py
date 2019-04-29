@@ -20,6 +20,9 @@ class Regularization:
             w - (np.array) A 1D array of parameters of length d+1. The current
                 parameters learned by the model. The +1 refers to the bias
                 term.
+        Returns:
+            regularization_term - (float) The value of the regularization term
+                evaluated at w.
         """
         pass
 
@@ -31,6 +34,9 @@ class Regularization:
             w - (np.array) A 1D array of parameters of length d+1. The current
                 parameters learned by the model. The +1 refers to the bias
                 term.
+        Returns:
+            gradient_term - (np.array) A numpy array of length d+1. The
+                gradient of the regularization term evaluated at w.
         """
         pass
 
@@ -44,13 +50,16 @@ class L1Regularization(Regularization):
         """
         Implements the forward pass thorugh the regularization term. For L1,
         this is the L1-norm of the model parameters weighted by the
-        regularization parameter. Note that the bias should NOT be included in
-        regularization.
+        regularization parameter. Note that the bias (the last value in w)
+        should NOT be included in regularization.
 
         Arguments:
             w - (np.array) A 1D array of parameters of length d+1. The current
                 parameters learned by the model. The +1 refers to the bias
                 term.
+        Returns:
+            regularization_term - (float) The value of the regularization term
+                evaluated at w.
         """
         raise NotImplementedError()
 
@@ -64,6 +73,9 @@ class L1Regularization(Regularization):
             w - (np.array) A 1D array of parameters of length d+1. The current
                 parameters learned by the model. The +1 refers to the bias
                 term.
+        Returns:
+            gradient_term - (np.array) A numpy array of length d+1. The
+                gradient of the regularization term evaluated at w.
         """
         raise NotImplementedError()
 
@@ -77,13 +89,16 @@ class L2Regularization(Regularization):
         """
         Implements the forward pass thorugh the regularization term. For L2,
         this is the squared L2-norm of the model parameters weighted by the
-        regularization parameter. Note that the bias should NOT be included in
-        regularization.
+        regularization parameter. Note that the bias (the last value in w)
+        should NOT be included in regularization.
 
         Arguments:
             w - (np.array) A 1D array of parameters of length d+1. The current
                 parameters learned by the model. The +1 refers to the bias
                 term.
+        Returns:
+            regularization_term - (float) The value of the regularization term
+                evaluated at w.
         """
         raise NotImplementedError()
 
@@ -97,5 +112,8 @@ class L2Regularization(Regularization):
             w - (np.array) A 1D array of parameters of length d+1. The current
                 parameters learned by the model. The +1 refers to the bias
                 term.
+        Returns:
+            gradient_term - (np.array) A numpy array of length d+1. The
+                gradient of the regularization term evaluated at w.
         """
         raise NotImplementedError()
