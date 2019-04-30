@@ -53,7 +53,7 @@ class GradientDescent:
               opposite to the current gradient. Use the learning rate as the
               step size.
         For the convergence criteria, compute the loss over all examples. If
-        this loss changes by less than 1e-5 during an update, assume that the
+        this loss changes by less than 1e-4 during an update, assume that the
         model has converged. If this convergence criteria has not been met
         after max_iter iterations, also assume convergence and terminate.
 

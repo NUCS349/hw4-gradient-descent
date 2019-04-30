@@ -5,7 +5,9 @@ here, we will check.
 
 
 In this assignment, you will:
-- FILL IN
+- Implement binary and multiclass gradient descent
+- Implement and explore the effect of regularization on gradient descent learning
+- Visualize the loss landscape traversed by gradient descent
 
 ## Clone this repository
 
