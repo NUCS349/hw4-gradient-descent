@@ -88,8 +88,8 @@ class L2Regularization(Regularization):
     def forward(self, w):
         """
         Implements the forward pass thorugh the regularization term. For L2,
-        this is the squared L2-norm of the model parameters weighted by the
-        regularization parameter. Note that the bias (the last value in w)
+        this is half the squared L2-norm of the model parameters weighted by
+        the regularization parameter. Note that the bias (the last value in w)
         should NOT be included in regularization.
 
         Arguments:

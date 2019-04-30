@@ -66,9 +66,13 @@ class SquaredLoss(Loss):
         """
         Computes the forward pass through the loss function. If
         self.regularization is not None, also adds the forward pass of the
-        regularization term to the loss.
+        regularization term to the loss. The squared loss for a single example
+        is given as follows:
 
-        # TODO
+        L_s(x, y; w) = (1/2) (y - w^T x)^2
+
+        The squared loss over a dataset of N points is the average of this
+        expression over all N examples.
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
@@ -88,8 +92,6 @@ class SquaredLoss(Loss):
         Computes the gradient of the loss function with respect to the model
         parameters. If self.regularization is not None, also adds the backward
         pass of the regularization term to the loss.
-
-        # TODO
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
@@ -116,9 +118,13 @@ class HingeLoss(Loss):
         """
         Computes the forward pass through the loss function. If
         self.regularization is not None, also adds the forward pass of the
-        regularization term to the loss.
+        regularization term to the loss. The hinge loss for a single example
+        is given as follows:
 
-        # TODO
+        L_h(x, y; w) = max(0, 1 - y w^T x)
+
+        The hinge loss over a dataset of N points is the average of this
+        expression over all N examples.
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
@@ -138,8 +144,6 @@ class HingeLoss(Loss):
         Computes the gradient of the loss function with respect to the model
         parameters. If self.regularization is not None, also adds the backward
         pass of the regularization term to the loss.
-
-        # TODO
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
