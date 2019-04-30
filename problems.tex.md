@@ -26,7 +26,8 @@ To answer some of the free-response questions, you will have to write extra code
 
 ## 3. () Multiclass Classification with Gradient Descent
     - a. () Confusion matrix
-    - b. () OVO vs OVA complexity
+    - b. () In this assignment, we used One-vs-All (OVA) to handle multiclass classification. For a dataset with $$c$$ classes and $$d$$ features, how many binary classifiers are needed in OVA classification? What is the space complexity of our OVA model?
+    - c. () An alternative to OVA classification is One-vs-One (OVO) classification, in which a binary classifier is trained to discriminate between each pair of classes, and the final prediction is decided via majority vote. For the same dataset considered in part (b), how many binary classifiers are need in OVO classification? What is the space complexity of our OVO model?
 
 ## 4. () Regularization and Feature Selection
     - a. () Here we will explore the use of L1 regularization as a means of feature selection. Setup an experiment using the `mnist-binary` dataset. Run gradient descent on the `mnist-binary` dataset using squared loss, using both 'l1' and 'l2' regularization. For each regularizer, run the algorithm 4 times for values of reg_param in [1e-3, 1e-2, 1e-1, 1]. Plot the number of non-zero model parameters of the learned model for each value of reg_param. Plot the trend line for both regularizers on one plot. Include your (labeled) plot and describe the trend in non-zero parameters for each regularizer.

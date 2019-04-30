@@ -43,5 +43,68 @@
     "test_l2_regularization_backward": {
         "weight": 1,
         "depends": []
+    },
+    "test_loss": {
+        "weight": 1,
+        "depends": [
+            "test_hinge_loss",
+            "test_squared_loss"
+        ]
+    },
+    "test_hinge_loss": {
+        "weight": 1,
+        "depends": [
+            "test_hinge_loss_forward",
+            "test_hinge_loss_backward"
+        ]
+    },
+    "test_squared_loss": {
+        "weight": 1,
+        "depends": [
+            "test_squared_loss_forward",
+            "test_squared_loss_backward"
+        ]
+    },
+    "test_hinge_loss_forward": {
+        "weight": 1,
+        "depends": []
+    },
+    "test_hinge_loss_backward": {
+        "weight": 1,
+        "depends": []
+    },
+    "test_squared_loss_forward": {
+        "weight": 1,
+        "depends": []
+    },
+    "test_squared_loss_backward": {
+        "weight": 1,
+        "depends": []
+    },
+    "test_gradient_descent": {
+        "weight": 1,
+        "depends": [
+            "test_gradient_descent_blobs",
+            "test_gradient_descent_mnist_binary"
+        ]
+    },
+    "test_gradient_descent_blobs": {
+        "weight": 1,
+        "depends": [
+            "test_regularization",
+            "test_loss"
+        ]
+    },
+    "test_gradient_descent_mnist_binary": {
+        "weight": 1,
+        "depends": [
+            "test_loss"
+        ]
+    },
+    "test_multiclass_gradient_descent": {
+        "weight": 1,
+        "depends": [
+            "test_gradient_descent"
+        ]
     }
 }

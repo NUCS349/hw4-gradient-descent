@@ -40,7 +40,8 @@ class MultiClassGradientDescent:
         Arguments:
             features - (np.array) An Nxd array of features, where N is the
                 number of examples and d is the number of features.
-            targets - (np.array) A 2D array of targets of size Nxc.
+            targets - (np.array) A 1D array of targets of size N. Contains c
+                unique values (the possible class labels).
             batch_size - (int or None) The number of examples used in each
                 iteration. If None, use all of the examples in each update.
             max_iter - (int) The maximum number of updates to perform.

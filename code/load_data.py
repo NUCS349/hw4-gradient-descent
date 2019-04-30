@@ -21,8 +21,7 @@ def load_data(dataset):
     Returns:
         features - (np.array) An Nxd array of features, where N is the
             number of examples and d is the number of features.
-        targets - (np.array) A 2D array of targets of size Nxc. Note that c = 1
-            for all datasets except mnist-multiclass.
+        targets - (np.array) A 1D array of targets of size N.
     """
     if dataset == 'blobs':
         return load_json_data(os.path.join('data', 'blobs'), normalize=True)
@@ -46,17 +45,19 @@ def load_json_data(path, normalize=False):
     Returns:
         features - (np.array) An Nxd array of features, where N is the
             number of examples and d is the number of features.
-        targets - (np.array) A 2D array of targets of size Nxc.
+        targets - (np.array) A 1D array of targets of size N.
     """
     with open(path, 'rb') as file:
         data = json.load(file)
     features = np.array(data[0]).astype(float)
-    targets = np.array(data[1]).astype(float)
+    targets = np.array(data[1]).astype(int)
 
-    return features, np.expand_dims(targets, axis=1)
+    features = whiten(features) if normalize else features
+
+    return features, targets
 
 
-def load_mnist(threshold, normalize=False):
+def load_mnist(threshold, normalize=False, examples_per_class=500):
     """
     Loads a subset of the MNIST dataset
 
@@ -64,15 +65,24 @@ def load_mnist(threshold, normalize=False):
         threshold - (int) One greater than the maximum digit in the selected
             subset
         normalize - (bool) Whether to whiten the features.
+        examples_per_class - (int) Number of examples to retrieve in each
+            class.
     Returns:
         features - (np.array) An Nxd array of features, where N is the
             number of examples and d is the number of features.
-        targets - (np.array) A 2D array of targets of size Nxc.
+        targets - (np.array) A 1D array of targets of size N.
     """
     mnist = fetch_openml('mnist_784')
     features = mnist['data']
     targets = mnist['target']
-    return features[targets < threshold], targets[targets < threshold]
+
+    idxs = np.array([False] * len(features))
+    for c in range(threshold):
+        idxs[np.where(targets == c)[:examples_per_class]] = True
+
+    features = whiten(features[idxs]) if normalize else features
+
+    return features, targets[idxs]
 
 
 def normalize(features):
