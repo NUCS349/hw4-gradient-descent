@@ -1,7 +1,7 @@
 import json
 import numpy as np
 import os
-from sklearn.datasets import fetch_openml
+from code import load_mnist
 from sklearn.model_selection import train_test_split
 
 
@@ -32,9 +32,9 @@ def load_data(dataset, fraction=1.0):
         path = os.path.join('data', 'blobs')
         features, targets = load_json_data(path)
     elif dataset == 'mnist-binary':
-        features, targets = load_mnist(2)
+        features, targets = load_mnist_data(2)
     elif dataset == 'mnist-multiclass':
-        features, targets = load_mnist(5)
+        features, targets = load_mnist_data(5)
     elif dataset == 'synthetic':
         path = os.path.join('data', 'synthetic')
         features, targets = load_json_data(path)
@@ -79,7 +79,7 @@ def load_json_data(path):
     return features, targets
 
 
-def load_mnist(threshold, examples_per_class=500):
+def load_mnist_data(threshold, examples_per_class=500):
     """
     Loads a subset of the MNIST dataset
 
@@ -94,12 +94,10 @@ def load_mnist(threshold, examples_per_class=500):
             number of examples and d is the number of features.
         targets - (np.array) A 1D array of targets of size N.
     """
-    mnist = fetch_openml('mnist_784')
-    features = mnist['data']
-    targets = mnist['target']
+    features, targets = load_mnist(digits=range(threshold), path='data')
 
     idxs = np.array([False] * len(features))
-    for c in range(threshold):
-        idxs[np.where(targets == c)[:examples_per_class]] = True
+    for target in np.unique(targets):
+        idxs[np.where(targets == target)[:examples_per_class]] = True
 
     return features, targets[idxs]
