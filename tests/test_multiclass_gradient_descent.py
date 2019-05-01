@@ -25,7 +25,7 @@ def test_mutliclass_gradient_descent_blobs():
     """
     from code import MultiClassGradientDescent
 
-    features, targets = load_data('blobs')
+    features, _, targets, _ = load_data('blobs')
 
     learner = MultiClassGradientDescent(loss='squared', regularization=None,
                                         learning_rate=0.01, reg_param=0.05)
@@ -42,11 +42,12 @@ def test_mutliclass_gradient_mnist():
     """
     from code import MultiClassGradientDescent, accuracy
 
-    features, targets = load_data('mnist-multiclass')
+    train_features, test_features, train_targets, test_targets = \
+        load_data('mnist-multiclass', fraction=0.8)
 
     learner = MultiClassGradientDescent(loss='squared', regularization=None,
                                         learning_rate=0.01, reg_param=0.05)
-    learner.fit(features, targets, batch_size=None, max_iter=1000)
-    predictions = learner.predict(features)
+    learner.fit(train_features, train_targets, batch_size=None, max_iter=1000)
+    predictions = learner.predict(test_features)
 
-    assert accuracy(targets, predictions) > 0.6
+    assert accuracy(test_targets, predictions) > 0.6

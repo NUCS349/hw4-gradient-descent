@@ -3,10 +3,19 @@ from code import load_data
 
 
 def make_predictions(features, targets, loss, regularization):
+    """
+    Fit and predict on the training set using gradient descent and default
+    parameter values. Note that in practice, the testing set should be used for
+    predictions. This code is just to common-sense check that your gradient
+    descent algorithm can classify the data it was trained on.
+    """
+    from code import GradientDescent
+
     np.random.seed(0)
     learner = GradientDescent(loss=loss, regularization=regularization,
                               learning_rate=0.01, reg_param=0.05)
     learner.fit(features, targets, batch_size=None, max_iter=1000)
+
     return learner.predict(features)
 
 
@@ -15,9 +24,7 @@ def test_gradient_descent_blobs():
     Tests the ability of the gradient descent algorithm to classify a linearly
     separable dataset.
     """
-    from code import GradientDescent
-
-    features, targets = load_data('blobs')
+    features, _, targets, _ = load_data('blobs')
 
     hinge = make_predictions(features, targets, 'hinge', None)
     assert np.all(hinge == targets)
@@ -45,8 +52,13 @@ def test_gradient_descent_mnist_binary():
     """
     from code import GradientDescent, accuracy
 
-    features, targets = load_data('mnist-binary')
+    train_features, test_features, train_targets, test_targets = \
+        load_data('mnist-binary', fraction=0.8)
 
-    predictions = make_predictions(features, targets, 'squared', None)
-    assert accuracy(targets, predictions) > 0.9
+    np.random.seed(0)
+    learner = GradientDescent(loss='squared', regularization=None,
+                              learning_rate=0.01, reg_param=0.05)
+    learner.fit(train_features, train_targets, batch_size=None, max_iter=1000)
+    predictions = learner.predict(test_features)
 
+    assert accuracy(test_targets, predictions) > 0.8

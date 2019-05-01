@@ -2,11 +2,13 @@ import json
 import numpy as np
 import os
 from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
 
 
-def load_data(dataset):
+def load_data(dataset, fraction=1.0):
     """
-    Loads a dataset.
+    Loads a dataset and performs a random stratified split into training and
+    test partitions.
 
     Arguments:
         dataset - (string) The name of the dataset to load. One of the
@@ -19,23 +21,45 @@ def load_data(dataset):
               'synthetic': A small custom dataset for exploring properties of
                   gradient descent algorithms.
     Returns:
-        features - (np.array) An Nxd array of features, where N is the
+        train_features - (np.array) An Nxd array of features, where N is the
             number of examples and d is the number of features.
-        targets - (np.array) A 1D array of targets of size N.
+        test_features - (np.array) An Nxd array of features, where M is the
+            number of examples and d is the number of features.
+        train_targets - (np.array) A 1D array of targets of size N.
+        test_targets - (np.array) A 1D array of targets of size M.
     """
     if dataset == 'blobs':
-        return load_json_data(os.path.join('data', 'blobs'), normalize=True)
+        path = os.path.join('data', 'blobs')
+        features, targets = load_json_data(path)
     elif dataset == 'mnist-binary':
-        return load_mnist(2, normalize=True)
+        features, targets = load_mnist(2)
     elif dataset == 'mnist-multiclass':
-        return load_mnist(5, normalize=True)
+        features, targets = load_mnist(5)
     elif dataset == 'synthetic':
-        return load_json_data(os.path.join('data', 'synthetic'))
+        path = os.path.join('data', 'synthetic')
+        features, targets = load_json_data(path)
     else:
         raise ValueError('Dataset {} not found!'.format(dataset))
 
+    # Split the data into training and testing sets
+    np.random.seed(0)
+    train_features, test_features, train_targets, test_targets = \
+        train_test_split(
+            features, targets, test_size=1.0 - fraction, stratify=targets)
 
-def load_json_data(path, normalize=False):
+    # Normalize the data using feature-independent whitening. Note that the
+    # statistics are computed with respect to the training set and applied to
+    # both the training and testing sets.
+    if dataset != 'synthetic':
+        mean = train_features.mean(axis=0, keepdims=True)
+        std = train_features.std(axis=0, keepdims=True)
+        train_features = (train_features - mean) / std
+        test_features = (test_features - mean) / std
+
+    return train_features, test_features, train_targets, test_targets
+
+
+def load_json_data(path):
     """
     Loads data from JSON files.
 
@@ -52,12 +76,10 @@ def load_json_data(path, normalize=False):
     features = np.array(data[0]).astype(float)
     targets = np.array(data[1]).astype(int)
 
-    features = whiten(features) if normalize else features
-
     return features, targets
 
 
-def load_mnist(threshold, normalize=False, examples_per_class=500):
+def load_mnist(threshold, examples_per_class=500):
     """
     Loads a subset of the MNIST dataset
 
@@ -80,30 +102,4 @@ def load_mnist(threshold, normalize=False, examples_per_class=500):
     for c in range(threshold):
         idxs[np.where(targets == c)[:examples_per_class]] = True
 
-    features = whiten(features[idxs]) if normalize else features
-
     return features, targets[idxs]
-
-
-def normalize(features):
-    """
-    Performs whitening independently on each feature. This allows our
-    hyperparameters (e.g., learning_rate) to have a consistent magnitude of
-    effect across datasets.
-
-    Note: here we are normalizing using statistics computed over the entire
-    dataset. When we are using multiple data partitions (e.g., train,
-    validation, test), statistics are computed ONLY on the training set. Those
-    statistics are then stored and applied to the normalization of the
-    valieation and test sets.
-
-    Arguments:
-        features - (np.array) A Nxd array of features, where N is the
-            number of examples and d is the number of features.
-    Returns:
-        normalized - (np.array) The whitened features. The dimensionality is
-            preserved with respect to the input features.
-    """
-    mean = features.mean(axis=0, keepdims=True)
-    std = features.std(axis=0, keepdims=True)
-    return (features - mean) / std
