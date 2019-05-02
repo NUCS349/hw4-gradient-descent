@@ -104,6 +104,26 @@
     "test_multiclass_gradient_descent": {
         "weight": 1,
         "depends": [
+            "test_multiclass_gradient_descent_separable",
+            "test_multiclass_gradient_descent_blobs",
+            "test_multiclass_gradient_descent_mnist"
+        ]
+    },
+    "test_multiclass_gradient_descent_separable": {
+        "weight": 1,
+        "depends": [
+            "test_gradient_descent"
+        ]
+    },
+    "test_multiclass_gradient_descent_blobs": {
+        "weight": 1,
+        "depends": [
+            "test_gradient_descent"
+        ]
+    },
+    "test_multiclass_gradient_descent_mnist": {
+        "weight": 1,
+        "depends": [
             "test_gradient_descent"
         ]
     }

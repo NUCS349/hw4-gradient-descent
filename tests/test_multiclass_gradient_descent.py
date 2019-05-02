@@ -22,7 +22,7 @@ def test_multiclass_gradient_descent_separable():
     assert np.all(predictions == targets)
 
 
-def test_mutliclass_gradient_descent_blobs():
+def test_multiclass_gradient_descent_blobs():
     """
     Tests that the multiclass classifier also works on binary tasks
     """
@@ -40,7 +40,7 @@ def test_mutliclass_gradient_descent_blobs():
     assert np.all(predictions == targets)
 
 
-def test_mutliclass_gradient_descent_mnist():
+def test_multiclass_gradient_descent_mnist():
     """
     Tests the ability of the multiclass gradient descent classifier to classify
     a non-trivial problem with a reasonable accuracy.
