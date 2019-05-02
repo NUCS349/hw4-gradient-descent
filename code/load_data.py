@@ -38,6 +38,8 @@ def load_data(dataset, fraction=1.0):
     elif dataset == 'mnist-binary':
         train_features, test_features, train_targets, test_targets = \
             load_mnist_data(2, fraction=fraction)
+        train_targets = train_targets * 2 - 1
+        test_targets = test_targets * 2 - 1
     elif dataset == 'mnist-multiclass':
         train_features, test_features, train_targets, test_targets = \
             load_mnist_data(5, fraction=fraction)
