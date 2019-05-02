@@ -63,7 +63,7 @@ def test_squared_loss_backward():
 
     loss = SquaredLoss(regularization=None)
 
-    _true = np.array([16, -23, -7])
+    _true = np.array([-16, 23, 7])
     _est = loss.backward(X, w, y)
 
     assert np.allclose(_true, _est)
