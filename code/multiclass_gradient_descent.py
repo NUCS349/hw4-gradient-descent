@@ -25,6 +25,7 @@ class MultiClassGradientDescent:
         self.reg_param = reg_param
 
         self.model = []
+        self.classes = None
 
     def fit(self, features, targets, batch_size=None, max_iter=1000):
         """
@@ -48,6 +49,9 @@ class MultiClassGradientDescent:
         Modifies:
             self.model - (list) A list of c GradientDescent objects. The models
                 trained to perform OVA classification for each class.
+            self.classes - (np.array) A numpy array of the unique target
+                values. Required to associate a model index with a target value
+                in predict.
         """
         raise NotImplementedError()
 

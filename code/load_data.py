@@ -42,7 +42,7 @@ def load_data(dataset, fraction=1.0):
         test_targets = test_targets * 2 - 1
     elif dataset == 'mnist-multiclass':
         train_features, test_features, train_targets, test_targets = \
-            load_mnist_data(5, fraction=fraction)
+            load_mnist_data(5, fraction=fraction, examples_per_class=250)
     elif dataset == 'synthetic':
         path = os.path.join('data', 'synthetic.json')
         train_features, test_features, train_targets, test_targets = \
