@@ -108,12 +108,14 @@ def load_mnist_data(threshold, fraction=1.0, examples_per_class=500):
         dataset='training', digits=range(threshold), path='data')
     train_features, train_targets = stratified_subset(
         train_features, train_targets, train_examples)
+    train_features = train_features.reshape((len(train_features), -1))
 
     test_examples = examples_per_class - train_examples
     test_features, test_targets = load_mnist(
         dataset='testing', digits=range(threshold), path='data')
     test_features, test_targets = stratified_subset(
         test_features, test_targets, test_examples)
+    test_features = test_features.reshape((len(test_features), -1))
 
     return train_features, test_features, train_targets, test_targets
 
