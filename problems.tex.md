@@ -13,9 +13,12 @@ Your goal is to pass the test suite (contained in `tests/`). Once the tests are 
 
 Your grade for this section is defined by the autograder. If it says you got an 80/100, you get 4 points here.
 
-To answer some of the free-response questions, you will have to write extra code (that is not covered by the test cases). You may include your experiments in new files in the `experiments` directory. See `experiments/example.py` for an example. You can run any experiments you create within this directory with `python -m experiments.<experiment_name>`. For example, `python -m experiments.example` runs the example experiment.
+## The MNIST dataset
+The MNIST dataset of handwritten digits is used for this assignment. You can read more about it and download it [here](http://yann.lecun.com/exdb/mnist/). You must download all 4 files (the training images, training labels, testing images, and testing labels). Please unzip these files and store the unzipped files in `data/`. Note that these files are not pushed to GitHub, so you will need to repeat this process for each computer that you use to work on this assignment. In general, large files should not be stored in GitHub repositories. For all data loading in this assignment, use the `load_data` function that we have provided in `load_data.py`.
 
 # Free-response questions (5 points)
+
+To answer some of the free-response questions, you will have to write extra code (that is not covered by the test cases). You may include your experiments in new files in the `experiments` directory. See `experiments/example.py` for an example. You can run any experiments you create within this directory with `python -m experiments.<experiment_name>`. For example, `python -m experiments.example` runs the example experiment.
 
 ## 1. () Visualizing Gradient Descent
     - a. () Setup an experiment to classify the `mnist-binary` dataset using the gradient descent learner. For your loss function, use `hinge` loss. Keep all other gradient descent parameters as their defaults. After each iteration through the dataset (using batch gradient descent), compute both the loss and accuracy of the model on the dataset. Terminate after convergence or after 1000 iterations (i.e., `max_iter = 1000`). Construct and include two (labeled) plots of the loss and accuracy at each iteration.
