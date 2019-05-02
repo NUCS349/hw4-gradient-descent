@@ -8,6 +8,9 @@ def test_multiclass_gradient_descent_separable():
     classify a simple, separable dataset.
     """
     from code import MultiClassGradientDescent
+
+    np.random.seed(0)
+
     features = np.identity(4)
     targets = np.array(range(4))
 
@@ -25,6 +28,8 @@ def test_mutliclass_gradient_descent_blobs():
     """
     from code import MultiClassGradientDescent
 
+    np.random.seed(0)
+
     features, _, targets, _ = load_data('blobs')
 
     learner = MultiClassGradientDescent(loss='squared', regularization=None,
@@ -41,6 +46,8 @@ def test_mutliclass_gradient_descent_mnist():
     a non-trivial problem with a reasonable accuracy.
     """
     from code import MultiClassGradientDescent, accuracy
+
+    np.random.seed(0)
 
     train_features, test_features, train_targets, test_targets = \
         load_data('mnist-multiclass', fraction=0.8)
