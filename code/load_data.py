@@ -53,9 +53,10 @@ def load_data(dataset, fraction=1.0):
     # both the training and testing sets.
     if dataset != 'synthetic':
         mean = train_features.mean(axis=0, keepdims=True)
-        std = train_features.std(axis=0, keepdims=True)
+        std = train_features.std(axis=0, keepdims=True) + 1e-5
         train_features = (train_features - mean) / std
-        test_features = (test_features - mean) / std
+        if fraction < 1.0:
+            test_features = (test_features - mean) / std
 
     return train_features, test_features, train_targets, test_targets
 
@@ -78,9 +79,12 @@ def load_json_data(path, fraction=1.0):
     targets = np.array(data[1]).astype(int)
 
     # Split the data into training and testing sets
-    np.random.seed(0)
-    return train_test_split(
-        features, targets, test_size=1.0 - fraction, stratify=targets)
+    if fraction < 1.0:
+        np.random.seed(0)
+        return train_test_split(
+            features, targets, test_size=(1.0 - fraction), stratify=targets)
+
+    return features, np.array([[]]), targets, np.array([])
 
 
 def load_mnist_data(threshold, fraction=1.0, examples_per_class=500):
