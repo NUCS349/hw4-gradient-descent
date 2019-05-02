@@ -32,7 +32,7 @@ def load_data(dataset, fraction=1.0):
         test_targets - (np.array) A 1D array of targets of size M.
     """
     if dataset == 'blobs':
-        path = os.path.join('data', 'blobs')
+        path = os.path.join('data', 'blobs.json')
         train_features, test_features, train_targets, test_targets = \
             load_json_data(path, fraction=fraction)
     elif dataset == 'mnist-binary':
@@ -42,7 +42,7 @@ def load_data(dataset, fraction=1.0):
         train_features, test_features, train_targets, test_targets = \
             load_mnist_data(5, fraction=fraction)
     elif dataset == 'synthetic':
-        path = os.path.join('data', 'synthetic')
+        path = os.path.join('data', 'synthetic.json')
         train_features, test_features, train_targets, test_targets = \
             load_json_data(path)
     else:
