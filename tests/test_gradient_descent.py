@@ -61,4 +61,4 @@ def test_gradient_descent_mnist_binary():
     learner.fit(train_features, train_targets, batch_size=None, max_iter=1000)
     predictions = learner.predict(test_features)
 
-    assert accuracy(test_targets, predictions) > 0.8
+    assert accuracy(test_targets, predictions) > 0.97
