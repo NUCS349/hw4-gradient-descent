@@ -57,4 +57,4 @@ def test_multiclass_gradient_descent_mnist():
     learner.fit(train_features, train_targets, batch_size=None, max_iter=1000)
     predictions = learner.predict(test_features)
 
-    assert accuracy(test_targets, predictions) > 0.6
+    assert accuracy(test_targets, predictions) > 0.9
