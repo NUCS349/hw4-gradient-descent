@@ -78,7 +78,8 @@
     "test_multiclass_gradient_descent_mnist": {
         "weight": 20,
         "depends": [
-            "test_gradient_descent"
+            "test_gradient_descent_blobs",
+            "test_gradient_descent_mnist_binary"
         ]
     }
 }
