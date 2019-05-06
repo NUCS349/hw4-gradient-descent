@@ -2,7 +2,6 @@ import json
 import numpy as np
 import os
 from code import load_mnist
-from sklearn.model_selection import train_test_split
 
 
 def load_data(dataset, fraction=1.0):
@@ -34,7 +33,7 @@ def load_data(dataset, fraction=1.0):
     if dataset == 'blobs':
         path = os.path.join('data', 'blobs.json')
         train_features, test_features, train_targets, test_targets = \
-            load_json_data(path, fraction=fraction)
+            load_json_data(path)
     elif dataset == 'mnist-binary':
         train_features, test_features, train_targets, test_targets = \
             load_mnist_data(2, fraction=fraction)
@@ -63,28 +62,27 @@ def load_data(dataset, fraction=1.0):
     return train_features, test_features, train_targets, test_targets
 
 
-def load_json_data(path, fraction=1.0):
+def load_json_data(path):
     """
     Loads data from JSON files.
 
     Args:
         path - (string) Path to json file containing the data
-        normalize - (bool) Whether to whiten the features.
+        fraction - (float) Value between 0.0 and 1.0 representing the fraction
+            of data to include in the training set. The remaining data is
+            included in the test set. Unused if dataset == 'synthetic'.
     Returns:
-        features - (np.array) An Nxd array of features, where N is the
+        train_features - (np.array) An Nxd array of features, where N is the
             number of examples and d is the number of features.
-        targets - (np.array) A 1D array of targets of size N.
+        test_features - (np.array) An Nxd array of features, where M is the
+            number of examples and d is the number of features.
+        train_targets - (np.array) A 1D array of targets of size N.
+        test_targets - (np.array) A 1D array of targets of size M.
     """
     with open(path, 'rb') as file:
         data = json.load(file)
     features = np.array(data[0]).astype(float)
     targets = np.array(data[1]).astype(int)
-
-    # Split the data into training and testing sets
-    if fraction < 1.0:
-        np.random.seed(0)
-        return train_test_split(
-            features, targets, test_size=(1.0 - fraction), stratify=targets)
 
     return features, np.array([[]]), targets, np.array([])
 
@@ -96,13 +94,18 @@ def load_mnist_data(threshold, fraction=1.0, examples_per_class=500):
     Arguments:
         threshold - (int) One greater than the maximum digit in the selected
             subset
-        normalize - (bool) Whether to whiten the features.
+        fraction - (float) Value between 0.0 and 1.0 representing the fraction
+            of data to include in the training set. The remaining data is
+            included in the test set. Unused if dataset == 'synthetic'.
         examples_per_class - (int) Number of examples to retrieve in each
             class.
     Returns:
-        features - (np.array) An Nxd array of features, where N is the
+        train_features - (np.array) An Nxd array of features, where N is the
             number of examples and d is the number of features.
-        targets - (np.array) A 1D array of targets of size N.
+        test_features - (np.array) An Nxd array of features, where M is the
+            number of examples and d is the number of features.
+        train_targets - (np.array) A 1D array of targets of size N.
+        test_targets - (np.array) A 1D array of targets of size M.
     """
 
     train_examples = int(examples_per_class * fraction)
@@ -134,10 +137,12 @@ def stratified_subset(features, targets, examples_per_class):
         examples_per_class - (int) The number of examples to take in each
             unique class.
     Returns:
-        features - (np.array) A subset of the input features of size
-            examples_per_class.
-        tarets (np.array) A subset of the input targets of size
-            examples_per_class.
+        train_features - (np.array) An Nxd array of features, where N is the
+            number of examples and d is the number of features.
+        test_features - (np.array) An Nxd array of features, where M is the
+            number of examples and d is the number of features.
+        train_targets - (np.array) A 1D array of targets of size N.
+        test_targets - (np.array) A 1D array of targets of size M.
     """
     idxs = np.array([False] * len(features))
     for target in np.unique(targets):
