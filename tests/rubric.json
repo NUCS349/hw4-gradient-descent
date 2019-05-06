@@ -8,101 +8,101 @@
         "depends": []
     },
     "test_regularization": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_l1_regularization",
             "test_l2_regularization"
         ]
     },
     "test_l1_regularization": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_l1_regularization_forward",
             "test_l1_regularization_backward"
         ]
     },
     "test_l2_regularization": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_l2_regularization_forward",
             "test_l2_regularization_backward"
         ]
     },
     "test_l1_regularization_forward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_l1_regularization_backward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_l2_regularization_forward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_l2_regularization_backward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_loss": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_hinge_loss",
             "test_squared_loss"
         ]
     },
     "test_hinge_loss": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_hinge_loss_forward",
             "test_hinge_loss_backward"
         ]
     },
     "test_squared_loss": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_squared_loss_forward",
             "test_squared_loss_backward"
         ]
     },
     "test_hinge_loss_forward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_hinge_loss_backward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_squared_loss_forward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_squared_loss_backward": {
-        "weight": 1,
+        "weight": 5,
         "depends": []
     },
     "test_gradient_descent": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_gradient_descent_blobs",
             "test_gradient_descent_mnist_binary"
         ]
     },
     "test_gradient_descent_blobs": {
-        "weight": 1,
+        "weight": 10,
         "depends": [
             "test_regularization",
             "test_loss"
         ]
     },
     "test_gradient_descent_mnist_binary": {
-        "weight": 1,
+        "weight": 10,
         "depends": [
             "test_loss"
         ]
     },
     "test_multiclass_gradient_descent": {
-        "weight": 1,
+        "weight": 0,
         "depends": [
             "test_multiclass_gradient_descent_separable",
             "test_multiclass_gradient_descent_blobs",
@@ -110,19 +110,19 @@
         ]
     },
     "test_multiclass_gradient_descent_separable": {
-        "weight": 1,
+        "weight": 10,
         "depends": [
             "test_gradient_descent"
         ]
     },
     "test_multiclass_gradient_descent_blobs": {
-        "weight": 1,
+        "weight": 10,
         "depends": [
             "test_gradient_descent"
         ]
     },
     "test_multiclass_gradient_descent_mnist": {
-        "weight": 1,
+        "weight": 20,
         "depends": [
             "test_gradient_descent"
         ]
