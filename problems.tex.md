@@ -22,7 +22,7 @@ To answer some of the free-response questions, you will have to write extra code
 
 ## 1. (1.25 points) Visualizing Gradient Descent
 
-a. (0.5 points) Setup an experiment to classify the `mnist-binary` dataset using the gradient descent learner. For your loss function, use `hinge` loss. Keep all other gradient descent parameters as their defaults. After each iteration through the dataset (using batch gradient descent), compute both the loss and accuracy of the model on the dataset. Terminate after convergence or after 1000 iterations (i.e., `max_iter = 1000`). Construct and include two (labeled) plots of the loss and accuracy at each iteration.
+a. (0.5 points) Setup an experiment to classify the `mnist-binary` dataset (see `load_data.py` for more on that dataset) using the gradient descent learner. For your loss function, use `hinge` loss. Keep all other gradient descent parameters as their defaults. After each iteration through the dataset (using batch gradient descent), compute both the loss and accuracy of the model on the dataset. Terminate after convergence or after 1000 iterations (i.e., `max_iter = 1000`). Construct and include two (labeled) plots of the loss and accuracy at each iteration.
 
 b. (0.5 points) Repeat the previous experiment, but this time use stochastic gradient descent. Compute and plot the loss and accuracy over the entire dataset after each *epoch*. One epoch is one iteration through the entire dataset. Note that you will need to increase the value of `max_iter` to do this. Terminate after convergence or after 1000 epochs. Construct and include the two (labeled) plots of the loss and accuracy at each epoch.
 
