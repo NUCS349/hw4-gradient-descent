@@ -13,7 +13,7 @@ class GradientDescent:
             One of 'l1', 'l2', or None. See regularization.py for more details.
         learning_rate - (float) The size of each gradient descent update step.
         reg_param - (float) The hyperparameter that controls the amount of
-            regularization to perform.
+            regularization to perform. Must be non-negative.
     """
     def __init__(self, loss, regularization=None,
                  learning_rate=0.01, reg_param=0.05):

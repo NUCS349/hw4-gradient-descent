@@ -6,7 +6,7 @@ class Regularization:
 
     Arguments:
         reg_param - (float) The hyperparameter that controls the amount of
-            regularization to perform.
+            regularization to perform. Must be non-negative.
     """
 
     def __init__(self, reg_param=0.05):

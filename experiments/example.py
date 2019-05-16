@@ -2,9 +2,10 @@ from code import GradientDescent, load_data
 
 print('Starting example experiment')
 
-features, targets = load_data('blobs')
+train_features, test_features, train_targets, test_targets = \
+    load_data('blobs', fraction=0.6)
 learner = GradientDescent()
-learner.fit(features, targets)
-predictions = learner.predict(features)
+learner.fit(train_features, train_targets)
+predictions = learner.predict(test_features)
 
 print('Finished example experiment')
