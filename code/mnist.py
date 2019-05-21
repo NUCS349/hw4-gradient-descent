@@ -88,7 +88,7 @@ def load_mnist(path, dataset="training", digits=None, asbytes=False,
 
     if return_labels:
         labels = np.zeros((len(indices)), dtype=np.int8)
-    for i in indices:
+    for i in range(len(indices)):
         images[i] = np.array(images_raw[indices[i] * rows * cols:(indices[i] + 1) * rows * cols]).reshape((rows, cols))
         if return_labels:
             labels[i] = labels_raw[indices[i]]
