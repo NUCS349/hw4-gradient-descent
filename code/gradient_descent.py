@@ -5,7 +5,18 @@ from code import L1Regularization, L2Regularization
 
 class GradientDescent:
     """
-    A linear gradient descent classifier with offset.
+    This is a linear classifier similar to the one you implemented in the
+    linear regressor homework. This is the classification via regression
+    case. The goal here is to learn some hyperplane, y = w^T x + b, such that
+    when features, x, are processed by our model (w and b), the result is
+    some value y. If y is in [0.0, +inf), the predicted classification label
+    is +1 and if y is in (-inf, 0.0) the predicted classification label is
+    -1.
+
+    The catch here is that we will not be using the closed form solution,
+    rather, we will be using gradient descent. In your fit function you
+    will determine a loss and update your model (w and b) using gradient
+    descent. More details below.
 
     Arguments:
         loss - (string) The loss function to use. Either 'hinge' or 'squared'.
@@ -76,8 +87,8 @@ class GradientDescent:
     def predict(self, features):
         """
         Predicts the class labels of each example in features. Model output
-        values above 0 are predicted to have label +1. Non-positive output
-        values are predicted to have label -1.
+        values at and above 0 are predicted to have label +1. Non-positive
+        output values are predicted to have label -1.
 
         NOTE: your predict function should make use of your confidence
         function (see below).
