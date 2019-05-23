@@ -8,7 +8,7 @@ class GradientDescent:
     A linear gradient descent classifier with offset.
 
     Arguments:
-        loss - (string) The loss function to use. One of 'hinge' or 'squared'.
+        loss - (string) The loss function to use. Either 'hinge' or 'squared'.
         regularization - (string or None) The type of regularization to use.
             One of 'l1', 'l2', or None. See regularization.py for more details.
         learning_rate - (float) The size of each gradient descent update step.
@@ -80,7 +80,7 @@ class GradientDescent:
         values are predicted to have label -1.
 
         NOTE: your predict function should make use of your confidence
-        function.
+        function (see below).
 
         Arguments:
             features - (np.array) A Nxd array of features, where N is the

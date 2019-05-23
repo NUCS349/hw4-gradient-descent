@@ -4,6 +4,8 @@ class Regularization:
     """
     Abstract base class for regularization terms in gradient descent.
 
+    *** THIS IS A BASE CLASS: YOU DO NOT NEED TO IMPLEMENT THIS ***
+
     Arguments:
         reg_param - (float) The hyperparameter that controls the amount of
             regularization to perform. Must be non-negative.
@@ -14,7 +16,9 @@ class Regularization:
 
     def forward(self, w):
         """
-        Implements the forward pass thorugh the regularization term.
+        Implements the forward pass through the regularization term.
+
+        *** THIS IS A BASE CLASS: YOU DO NOT NEED TO IMPLEMENT THIS ***
 
         Arguments:
             w - (np.array) A 1D array of parameters of length d+1. The current
@@ -29,6 +33,8 @@ class Regularization:
     def backward(self, w):
         """
         Implements the backward pass through the regularization term.
+
+        *** THIS IS A BASE CLASS: YOU DO NOT NEED TO IMPLEMENT THIS ***
 
         Arguments:
             w - (np.array) A 1D array of parameters of length d+1. The current
@@ -48,7 +54,7 @@ class L1Regularization(Regularization):
 
     def forward(self, w):
         """
-        Implements the forward pass thorugh the regularization term. For L1,
+        Implements the forward pass through the regularization term. For L1,
         this is the L1-norm of the model parameters weighted by the
         regularization parameter. Note that the bias (the last value in w)
         should NOT be included in regularization.
@@ -87,7 +93,7 @@ class L2Regularization(Regularization):
 
     def forward(self, w):
         """
-        Implements the forward pass thorugh the regularization term. For L2,
+        Implements the forward pass through the regularization term. For L2,
         this is half the squared L2-norm of the model parameters weighted by
         the regularization parameter. Note that the bias (the last value in w)
         should NOT be included in regularization.

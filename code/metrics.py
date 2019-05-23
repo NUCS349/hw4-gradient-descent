@@ -26,8 +26,8 @@ def confusion_matrix(ground_truth, predictions):
         predictions - (np.array) A 1D numpy array of length N. The class labels
             predicted by the model.
     Returns:
-        confusion_matrix - (np.array) The confusion matrix. A cxc numpy array,
-            where c is the number of unique classes. Index i, j is the number
+        confusion_matrix - (np.array) The confusion matrix. A CxC numpy array,
+            where C is the number of unique classes. Index i, j is the number
             of times an example belonging to class i was predicted to belong
             to class j.
     """

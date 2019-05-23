@@ -3,13 +3,15 @@ import numpy as np
 
 class Loss:
     """
-    An abstract base class for a loss function that computes both the original
+    An abstract base class for a loss function that computes both the prescribed
     loss function (the forward pass) as well as its gradient (the backward
     pass).
 
+    *** THIS IS A BASE CLASS: YOU DO NOT NEED TO IMPLEMENT THIS ***
+
     Arguments:
-        regularization - (Regularization or None) The type of regularization to
-            perform. Either a derived class of Regularization or None. If None,
+        regularization - (`Regularization` or None) The type of regularization to
+            perform. Either a derived class of `Regularization` or None. If None,
             no regularization is performed.
     """
 
@@ -22,6 +24,8 @@ class Loss:
         self.regularization is not None, also adds the forward pass of the
         regularization term to the loss.
 
+        *** THIS IS A BASE CLASS: YOU DO NOT NEED TO IMPLEMENT THIS ***
+
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
                 of examples and d is the number of features. The +1 refers to
@@ -31,7 +35,8 @@ class Loss:
                 term.
             y - (np.array) A 1D array of targets of length N.
         Returns:
-            loss - (float) The average loss.
+            loss - (float) The calculated loss normalized by the number of
+                examples, N.
         """
         pass
 
@@ -40,6 +45,8 @@ class Loss:
         Computes the gradient of the loss function with respect to the model
         parameters. If self.regularization is not None, also adds the backward
         pass of the regularization term to the loss.
+
+        *** THIS IS A BASE CLASS: YOU DO NOT NEED TO IMPLEMENT THIS ***
 
         Arguments:
             X - (np.array) An Nx(d+1) array of features, where N is the number
@@ -83,7 +90,8 @@ class SquaredLoss(Loss):
                 term.
             y - (np.array) A 1D array of targets of length N.
         Returns:
-            loss - (float) The average loss.
+            loss - (float) The calculated loss normalized by the number of
+                examples, N.
         """
         raise NotImplementedError()
 
@@ -112,6 +120,8 @@ class SquaredLoss(Loss):
 class HingeLoss(Loss):
     """
     The hinge loss function.
+
+    https://en.wikipedia.org/wiki/Hinge_loss
     """
 
     def forward(self, X, w, y):
@@ -135,7 +145,8 @@ class HingeLoss(Loss):
                 term.
             y - (np.array) A 1D array of targets of length N.
         Returns:
-            loss - (float) The average loss.
+            loss - (float) The calculated loss normalized by the number of
+                examples, N.
         """
         raise NotImplementedError()
 
