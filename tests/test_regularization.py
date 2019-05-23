@@ -25,7 +25,7 @@ def test_l1_regularization_backward():
     X = np.array([[-1, 2, 1], [-3, 4, 1]])
     regularizer = L1Regularization(reg_param=0.5)
 
-    _true = np.array([[0.5, 0.5, 0], [0.5, 0.5, 0]])
+    _true = np.array([[-0.5, 0.5, 0], [-0.5, 0.5, 0]])
     _est = np.array([regularizer.backward(x) for x in X])
 
     assert np.allclose(_true, _est)
