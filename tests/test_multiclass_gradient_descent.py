@@ -1,5 +1,5 @@
 import numpy as np
-from code import load_data
+from your_code import load_data
 
 
 def test_multiclass_gradient_descent_separable():
@@ -7,7 +7,7 @@ def test_multiclass_gradient_descent_separable():
     Tests the ability of the OVA multiclass gradient descent classifier to
     classify a simple, separable dataset.
     """
-    from code import MultiClassGradientDescent
+    from your_code import MultiClassGradientDescent
 
     np.random.seed(0)
 
@@ -26,7 +26,7 @@ def test_multiclass_gradient_descent_blobs():
     """
     Tests that the multiclass classifier also works on binary tasks
     """
-    from code import MultiClassGradientDescent
+    from your_code import MultiClassGradientDescent
 
     np.random.seed(0)
 
@@ -45,7 +45,7 @@ def test_multiclass_gradient_descent_mnist():
     Tests the ability of the multiclass gradient descent classifier to classify
     a non-trivial problem with a reasonable accuracy.
     """
-    from code import MultiClassGradientDescent, accuracy
+    from your_code import MultiClassGradientDescent, accuracy
 
     np.random.seed(0)
 
@@ -57,4 +57,4 @@ def test_multiclass_gradient_descent_mnist():
     learner.fit(train_features, train_targets, batch_size=None, max_iter=1000)
     predictions = learner.predict(test_features)
 
-    assert accuracy(test_targets, predictions) > 0.9
+    assert accuracy(test_targets, predictions) >= 0.85

@@ -5,7 +5,7 @@ def test_l1_regularization_forward():
     """
     Test the forward pass of the L1Regularization class.
     """
-    from code import L1Regularization
+    from your_code import L1Regularization
 
     X = np.array([[-1, 2, 1], [-3, 4, 1]])
     regularizer = L1Regularization(reg_param=0.5)
@@ -20,7 +20,7 @@ def test_l1_regularization_backward():
     """
     Test the backward pass of the L1Regularization class.
     """
-    from code import L1Regularization
+    from your_code import L1Regularization
 
     X = np.array([[-1, 2, 1], [-3, 4, 1]])
     regularizer = L1Regularization(reg_param=0.5)
@@ -35,7 +35,7 @@ def test_l2_regularization_forward():
     """
     Test the forward pass of the L2Regularization class.
     """
-    from code import L2Regularization
+    from your_code import L2Regularization
 
     X = np.array([[-1, 2, 1], [-3, 4, 1]])
     regularizer = L2Regularization(reg_param=0.5)
@@ -50,7 +50,7 @@ def test_l2_regularization_backward():
     """
     Test the backward pass of the L2Regularization class.
     """
-    from code import L2Regularization
+    from your_code import L2Regularization
 
     X = np.array([[-1, 2, 1], [-3, 4, 1]])
     regularizer = L2Regularization(reg_param=0.5)

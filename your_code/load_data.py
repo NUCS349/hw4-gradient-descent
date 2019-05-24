@@ -5,7 +5,7 @@ import struct
 from array import array as pyarray
 
 
-def load_data(dataset, fraction=1.0):
+def load_data(dataset, fraction=1.0, base_folder='data'):
     """
     Loads a dataset and performs a random stratified split into training and
     test partitions.
@@ -23,6 +23,8 @@ def load_data(dataset, fraction=1.0):
         fraction - (float) Value between 0.0 and 1.0 representing the fraction
             of data to include in the training set. The remaining data is
             included in the test set. Unused if dataset == 'synthetic'.
+        base_folder - (string) absolute path to your 'data' directory. If
+            defaults to 'data'.
     Returns:
         train_features - (np.array) An Nxd array of features, where N is the
             number of examples and d is the number of features.
@@ -32,19 +34,20 @@ def load_data(dataset, fraction=1.0):
         test_targets - (np.array) A 1D array of targets of size M.
     """
     if dataset == 'blobs':
-        path = os.path.join('data', 'blobs.json')
+        path = os.path.join(base_folder, 'blobs.json')
         train_features, test_features, train_targets, test_targets = \
             load_json_data(path)
     elif dataset == 'mnist-binary':
         train_features, test_features, train_targets, test_targets = \
-            load_mnist_data(2, fraction=fraction)
+            load_mnist_data(2, fraction=fraction, mnist_folder=base_folder)
         train_targets = train_targets * 2 - 1
         test_targets = test_targets * 2 - 1
     elif dataset == 'mnist-multiclass':
         train_features, test_features, train_targets, test_targets = \
-            load_mnist_data(5, fraction=fraction, examples_per_class=100)
+            load_mnist_data(5, fraction=fraction, examples_per_class=100,
+                            mnist_folder=base_folder)
     elif dataset == 'synthetic':
-        path = os.path.join('data', 'synthetic.json')
+        path = os.path.join(base_folder,  'synthetic.json')
         train_features, test_features, train_targets, test_targets = \
             load_json_data(path)
     else:
@@ -91,7 +94,7 @@ def load_json_data(path, fraction=None, examples_per_class=None):
     return features, np.array([[]]), targets, np.array([])
 
 
-def load_mnist_data(threshold, fraction=1.0, examples_per_class=500):
+def load_mnist_data(threshold, fraction=1.0, examples_per_class=500, mnist_folder='data'):
     """
     Loads a subset of the MNIST dataset.
 
@@ -104,6 +107,7 @@ def load_mnist_data(threshold, fraction=1.0, examples_per_class=500):
             included in the test set. Unused if dataset == 'synthetic'.
         examples_per_class - (int) Number of examples to retrieve in each
             class.
+        mnist_folder - (string) Path to folder contain MNIST binary files.
 
     Returns:
         train_features - (np.array) An Nxd array of features, where N is the
@@ -113,20 +117,27 @@ def load_mnist_data(threshold, fraction=1.0, examples_per_class=500):
         train_targets - (np.array) A 1D array of targets of size N.
         test_targets - (np.array) A 1D array of targets of size M.
     """
+    assert 0.0 <= fraction <= 1.0, 'Whoopsies! Incorrect value for fraction :P'
 
     train_examples = int(examples_per_class * fraction)
-    train_features, train_targets = _load_mnist(
-        dataset='training', digits=range(threshold), path='data')
-    train_features, train_targets = stratified_subset(
-        train_features, train_targets, train_examples)
-    train_features = train_features.reshape((len(train_features), -1))
+    if train_examples == 0:
+        train_features, train_targets = np.array([[]]), np.array([])
+    else:
+        train_features, train_targets = _load_mnist(
+            dataset='training', digits=range(threshold), path=mnist_folder)
+        train_features, train_targets = stratified_subset(
+            train_features, train_targets, train_examples)
+        train_features = train_features.reshape((len(train_features), -1))
 
     test_examples = examples_per_class - train_examples
-    test_features, test_targets = _load_mnist(
-        dataset='testing', digits=range(threshold), path='data')
-    test_features, test_targets = stratified_subset(
-        test_features, test_targets, test_examples)
-    test_features = test_features.reshape((len(test_features), -1))
+    if test_examples == 0:
+        test_features, test_targets = np.array([[]]), np.array([])
+    else:
+        test_features, test_targets = _load_mnist(
+            dataset='testing', digits=range(threshold), path=mnist_folder)
+        test_features, test_targets = stratified_subset(
+            test_features, test_targets, test_examples)
+        test_features = test_features.reshape((len(test_features), -1))
 
     return train_features, test_features, train_targets, test_targets
 
@@ -257,5 +268,5 @@ def stratified_subset(features, targets, examples_per_class):
     """
     idxs = np.array([False] * len(features))
     for target in np.unique(targets):
-        idxs[np.where(targets == target)[:examples_per_class]] = True
+        idxs[np.where(targets == target)[0][:examples_per_class]] = True
     return features[idxs], targets[idxs]

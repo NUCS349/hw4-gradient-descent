@@ -1,5 +1,5 @@
 import numpy as np
-from code import load_data
+from your_code import load_data
 
 
 def make_predictions(features, targets, loss, regularization):
@@ -9,7 +9,7 @@ def make_predictions(features, targets, loss, regularization):
     predictions. This code is just to common-sense check that your gradient
     descent algorithm can classify the data it was trained on.
     """
-    from code import GradientDescent
+    from your_code import GradientDescent
 
     np.random.seed(0)
     learner = GradientDescent(loss=loss, regularization=regularization,
@@ -50,7 +50,7 @@ def test_gradient_descent_mnist_binary():
     Tests the ability of the gradient descent classifier to classify a
     non-trivial problem with a reasonable accuracy.
     """
-    from code import GradientDescent, accuracy
+    from your_code import GradientDescent, accuracy
 
     train_features, test_features, train_targets, test_targets = \
         load_data('mnist-binary', fraction=0.8)

@@ -1,5 +1,5 @@
 import numpy as np
-from code import GradientDescent
+from your_code import GradientDescent
 
 
 class MultiClassGradientDescent:
