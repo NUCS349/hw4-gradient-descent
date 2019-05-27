@@ -2,10 +2,10 @@
 
 Your task is to implement the gradient descent algorithm as well a multiclass classification wrapper for One-vs-All (OVA) classification. You will write the following code:
 
- - Two types of lp regularization and their gradients (in `code/regularization.py`)
- - Two loss functions and their gradients (in `code/loss.py`)
- - The gradient descent algorithm (in `code/gradient_descent.py`)
- - The OVA multiclass wrapper (in `code/multiclass_gradient_descent.py`)
+ - Two types of lp regularization and their gradients (in `your_code/regularization.py`)
+ - Two loss functions and their gradients (in `your_code/loss.py`)
+ - The gradient descent algorithm (in `your_code/gradient_descent.py`)
+ - The OVA multiclass wrapper (in `your_code/multiclass_gradient_descent.py`)
 
 Note that this is also the order in which we recommend you implement the code for this homework.
 
