@@ -170,3 +170,63 @@ class HingeLoss(Loss):
                 the bias term.
         """
         raise NotImplementedError()
+
+
+class ZeroOneLoss(Loss):
+    """
+    The 0-1 loss function.
+
+    The loss is 0 iff w^T x == y, else the loss is 1.
+
+    *** YOU DO NOT NEED TO IMPLEMENT THIS ***
+    """
+
+    def forward(self, X, w, y):
+        """
+        Computes the forward pass through the loss function. If
+        self.regularization is not None, also adds the forward pass of the
+        regularization term to the loss. The squared loss for a single example
+        is given as follows:
+
+        L_s(x, y; w) = {0 iff w^T x == y, else 1}
+
+        The squared loss over a dataset of N points is the average of this
+        expression over all N examples.
+
+        Arguments:
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
+            y - (np.array) A 1D array of targets of length N.
+        Returns:
+            loss - (float) The average loss.
+        """
+        predictions = (X @ w > 0.0).astype(int) * 2 - 1
+        loss = np.sum((predictions != y).astype(float)) / len(X)
+        if self.regularization:
+            loss += self.regularization.forward(w)
+        return loss
+
+    def backward(self, X, w, y):
+        """
+        Computes the gradient of the loss function with respect to the model
+        parameters. If self.regularization is not None, also adds the backward
+        pass of the regularization term to the loss.
+
+        Arguments:
+            X - (np.array) An Nx(d+1) array of features, where N is the number
+                of examples and d is the number of features. The +1 refers to
+                the bias term.
+            w - (np.array) A 1D array of parameters of length d+1. The current
+                parameters learned by the model. The +1 refers to the bias
+                term.
+            y - (np.array) A 1D array of targets of length N.
+        Returns:
+            gradient - (np.array) The (d+1)-dimensional gradient of the loss
+                function with respect to the model parameters. The +1 refers to
+                the bias term.
+        """
+        raise NotImplemented()
