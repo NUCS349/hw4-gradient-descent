@@ -188,7 +188,7 @@ class ZeroOneLoss(Loss):
         regularization term to the loss. The squared loss for a single example
         is given as follows:
 
-        L_s(x, y; w) = {0 iff w^T x == y, else 1}
+        L_0-1(x, y; w) = {0 iff w^T x == y, else 1}
 
         The squared loss over a dataset of N points is the average of this
         expression over all N examples.
@@ -229,4 +229,5 @@ class ZeroOneLoss(Loss):
                 function with respect to the model parameters. The +1 refers to
                 the bias term.
         """
-        raise NotImplemented()
+        # This function purposefully left blank
+        raise ValueError('No need to use this function for the homework :p')

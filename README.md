@@ -1,17 +1,20 @@
-# HWN: FILL IN for EECS 349 @ NU
+# HW7: Gradient Descent for EECS 349 @ NU
 **IMPORTANT: PUT YOUR NETID IN THE FILE** `netid` in the root directory of the assignment. 
 This is used to put the autograder output into Canvas. Please don't put someone else's netid 
 here, we will check.
 
 
 In this assignment, you will:
-- FILL IN
+- Implement Lp-norm regularization
+- Implement two types of loss functions
+- Implement multiclass and two class gradient descent
+- Do experiments to understand gradient descent, loss landscapes, and regularization.
 
 ## Clone this repository
 
 To clone this repository run the following command:
 
-``git clone https://github.com/nucs349/hw1-FILL-IN-[your_username]``
+``git clone https://github.com/nucs349/hw1-gradient-descent-[your_username]``
 
 `[your_username]` is replaced in the above link by your Github username. Alternatively, just look at the link in your address bar if you're viewing this README in your submission repository in a browser. Once cloned, `cd` into the cloned repository. Every assignment has some files that you edit to complete it. 
 
