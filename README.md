@@ -40,4 +40,4 @@ at the root directory of the assignment repository.
 
 ## Questions? Problems? Issues?
 
-Simply open an issue on the starter code repository for this assignment [here](https://github.com/NUCS349/hw-FILL-IN/issues). Someone from the teaching staff will get back to you through there!
+Simply open an issue on the starter code repository for this assignment [here](https://github.com/NUCS349/hw7-gradient-descent/issues). Someone from the teaching staff will get back to you through there!
