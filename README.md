@@ -12,12 +12,11 @@ In this assignment, you will:
 
 ## Clone this repository
 
-To clone this repository run the following command:
+To clone this repository install GIT on your computer and copy the link of the repository (find above at "Clone or Download") and enter in the command line:
 
-``git clone https://github.com/nucs349/spr2020-hw4-gradient-descent-[your_username]``
+``git clone YOUR-LINK``
 
-`[your_username]` is replaced in the above link by your Github username. Alternatively, just look at the link in your address bar if you're viewing this README in your submission repository in a browser. Once cloned, `cd` into the cloned repository. Every assignment has some files that you edit to complete it. 
-
+Alternatively, just look at the link in your address bar if you're viewing this README in your submission repository in a browser. Once cloned, `cd` into the cloned repository. Every assignment has some files that you edit to complete it. 
 ## Files you edit
 
 See problems.md for what files you will edit.
