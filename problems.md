@@ -1,4 +1,4 @@
-# Coding (5 points)
+# Coding (6 points)
 
 Your task is to implement the Gradient Descent algorithm. You will write the following code:
 
@@ -15,7 +15,7 @@ Your grade for this section is defined by the autograder. If it says you got an 
 ## The MNIST dataset
 The MNIST dataset of handwritten digits is used for this assignment. You can read more about it and download it [here](http://yann.lecun.com/exdb/mnist/). You must download all 4 files (the training images, training labels, testing images, and testing labels). Please unzip these files and store the unzipped files in `data/`. Note that these files are not pushed to GitHub, so you will need to repeat this process for each computer that you use to work on this assignment. In general, large files should not be stored in GitHub repositories. For all data loading in this assignment, use the `load_data` function that we have provided in `load_data.py`.
 
-# Free-response questions (5 points)
+# Free-response questions (4 points)
 
 To answer some of the free-response questions, you will have to write extra code (that is not covered by the test cases). You may include your experiments in new files in the `experiments` directory. See `experiments/example.py` for an example. You can run any experiments you create within this directory with `python -m experiments.<experiment_name>`. For example, `python -m experiments.example` runs the example experiment.
 
