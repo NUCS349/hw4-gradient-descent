@@ -1,4 +1,4 @@
-# HW4: Gradient Descent for EECS 349 @ NU
+# HW 5: Gradient Descent for EECS 349 @ NU
 **IMPORTANT: PUT YOUR NETID IN THE FILE** `netid` in the root directory of the assignment. 
 This is used to put the autograder output into Canvas. Please don't put someone else's netid 
 here, we will check.
@@ -7,7 +7,6 @@ here, we will check.
 In this assignment, you will:
 - Implement Lp-norm regularization
 - Implement two types of loss functions
-- Implement multiclass and two class gradient descent
 - Do experiments to understand gradient descent, loss landscapes, and regularization.
 
 ## Clone this repository
